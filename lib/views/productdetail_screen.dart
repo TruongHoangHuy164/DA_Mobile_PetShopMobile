@@ -1,7 +1,6 @@
-
-// Product Detail Screen
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final String id;
@@ -10,7 +9,13 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Chi tiết sản phẩm $id')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.go('/dashboard'), // Quay lại dashboard
+        ),
+        title: Text('Chi tiết sản phẩm $id'),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
