@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Text(
-                  'Categories',
+                  'Danh Mục',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Popular Picks for Pets',
+                        'Lựa chọn phù hợp cho Thú Cưng',
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       TextButton(
