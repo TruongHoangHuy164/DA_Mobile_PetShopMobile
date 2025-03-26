@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'PetShop',
+      title: 'Wikas PetShop',
       themeMode: themeProvider.themeMode,
       theme: ThemeData(
         brightness: Brightness.light,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -48,34 +49,30 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Banner Section với slide effect
-            AnimatedPositioned(
+            // Banner Section với fade effect
+            AnimatedOpacity(
+              opacity: _isVisible ? 1.0 : 0.0,
               duration: const Duration(milliseconds: 800),
-              top: _isVisible ? 0 : 50,
-              child: AnimatedOpacity(
-                opacity: _isVisible ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 800),
-                child: Container(
-                  height: 150,
-                  margin: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/banner/Meo.jpg'),
-                      fit: BoxFit.cover,
-                    ),
+              child: Container(
+                height: 150,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/banner/Meo.jpg'),
+                    fit: BoxFit.cover,
                   ),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(
-                        'Hi!\nChào mừng bạn',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                ),
+                child: const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Hi!\nChào mừng bạn',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -101,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 children: const [
                   CategoryItem(icon: Icons.fastfood, label: 'Food'),
-                  CategoryItem(icon: Icons.brush, label: 'Grooming'),
+                  CategoryItem(icon: Icons.shower, label: 'Grooming'),
                   CategoryItem(icon: Icons.toys, label: 'Toys'),
                   CategoryItem(icon: Icons.medical_services, label: 'Care'),
                   CategoryItem(icon: Icons.pets, label: 'Fetches'),
@@ -111,35 +108,31 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 ],
               ),
             ),
-            // Popular Picks Section với slide effect
-            AnimatedPositioned(
+            // Popular Picks Section với fade effect
+            AnimatedOpacity(
+              opacity: _isVisible ? 1.0 : 0.0,
               duration: const Duration(milliseconds: 1200),
-              top: _isVisible ? 0 : 50,
-              child: AnimatedOpacity(
-                opacity: _isVisible ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 1200),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Lựa chọn phù hợp cho Thú Cưng',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          // Navigate to a "View All" page
-                        },
-                        child: const Text('View All'),
-                      ),
-                    ],
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Lựa chọn phù hợp cho Thú Cưng',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Navigate to a "View All" page
+                      },
+                      child: const Text('View All'),
+                    ),
+                  ],
                 ),
               ),
             ),
             SizedBox(
-              height: 200,
+              height: 300, // Increased height to accommodate the new button layout
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -166,7 +159,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                     top: Radius.circular(15),
                                   ),
                                   child: Image.asset(
-                                   // 'assets/pet_$index.jpg',
                                     'assets/banner/Meo.jpg',
                                     fit: BoxFit.cover,
                                     width: double.infinity,
@@ -181,14 +173,93 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                     Text(
                                       'Sản phẩm $index',
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    const SizedBox(height: 5),
+                                    const SizedBox(height: 4),
                                     const Text(
                                       '500.000 VND',
-                                      style: TextStyle(color: Colors.greenAccent),
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.greenAccent,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    // Row of Add to Cart and Favorite buttons
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        // Add to Cart Button
+                                        IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: const BoxConstraints(),
+                                          icon: const Icon(
+                                            Icons.add_shopping_cart,
+                                            size: 18,
+                                            color: Colors.blue,
+                                          ),
+                                          onPressed: () {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Đã thêm Sản phẩm $index vào giỏ hàng'),
+                                                duration: const Duration(seconds: 2),
+                                              ),
+                                            );
+                                          },
+                                          tooltip: 'Thêm vào giỏ hàng',
+                                        ),
+                                        // Favorite Button
+                                        IconButton(
+                                          padding: EdgeInsets.zero,
+                                          constraints: const BoxConstraints(),
+                                          icon: const Icon(
+                                            Icons.favorite_border,
+                                            size: 18,
+                                            color: Colors.red,
+                                          ),
+                                          onPressed: () {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Đã thêm Sản phẩm $index vào yêu thích'),
+                                                duration: const Duration(seconds: 2),
+                                              ),
+                                            );
+                                          },
+                                          tooltip: 'Yêu thích',
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    // Buy Now Button (below the Row)
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text('Mua ngay Sản phẩm $index'),
+                                              duration: const Duration(seconds: 2),
+                                            ),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(vertical: 8),
+                                          backgroundColor: Colors.green,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          'Mua ngay',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
